@@ -154,6 +154,31 @@
             }
         }
 
+        function guardarEdicion() {
+            // Obtener el data-producto-id del modal
+            var productoId = parseInt(document.getElementById("editarModal").getAttribute("data-producto-id"));
+
+            // Buscar el producto por su ID
+            var producto = productos.find(function(p) {
+                return p.id === productoId;
+            });
+
+            if (producto) {
+                // Obtener los valores editados desde el modal
+                producto.nombre = document.getElementById("nombreProductoEditar").value;
+                producto.descripcion = document.getElementById("descripcionProductoEditar").value;
+
+                // Ocultar el modal de edición
+                var editarModal = new bootstrap.Modal(document.getElementById('editarModal'));
+                editarModal.hide();
+
+                // Actualizar la tabla
+                actualizarTabla();
+            }
+        }
+
+        
+
 
 </script>
 </body>
