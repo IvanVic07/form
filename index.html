@@ -120,6 +120,40 @@
             actualizarTabla();
         }
 
+        function encontrarProximoID() {
+            // Crear un conjunto de todos los IDs existentes
+            var idsExistente = new Set(productos.map(function(producto) {
+                return producto.id;
+            }));
+
+            // Buscar el primer ID disponible, comenzando desde 1
+            for (var i = 1; i <= idsExistente.size + 1; i++) {
+                if (!idsExistente.has(i)) {
+                    return i;
+                }
+            }
+        }
+
+        function editarFila(id) {
+            // Buscar el producto por su ID
+            var producto = productos.find(function(p) {
+                return p.id === id;
+            });
+
+            if (producto) {
+                // Llenar el modal de edición con los valores del producto
+                document.getElementById("nombreProductoEditar").value = producto.nombre;
+                document.getElementById("descripcionProductoEditar").value = producto.descripcion;
+
+                // Establecer el atributo data-producto-id en el modal
+                document.getElementById("editarModal").setAttribute("data-producto-id", producto.id);
+
+                // Mostrar el modal de edición
+                var editarModal = new bootstrap.Modal(document.getElementById('editarModal'));
+                editarModal.show();
+            }
+        }
+
 
 </script>
 </body>
