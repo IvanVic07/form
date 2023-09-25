@@ -177,7 +177,23 @@
             }
         }
 
+        function eliminarFila(id) {
+            // Encontrar el índice del producto en el array
+            var index = productos.findIndex(function(p) {
+                return p.id === id;
+            });
+
+            if (index !== -1) {
+                // Eliminar el producto del array
+                productos.splice(index, 1);
+
+                // Actualizar la tabla
+                actualizarTabla();
+            }
+        }
         
+
+
 
 
 </script>
