@@ -192,11 +192,34 @@
             }
         }
         
+        function actualizarTabla() {
+            // Obtener la tabla de productos
+            var tabla = document.getElementById("tablaProductos");
 
+            // Limpiar la tabla
+            tabla.innerHTML = "";
 
+            // Crear filas para cada producto
+            productos.forEach(function(producto) {
+                var fila = tabla.insertRow();
 
+                // Agregar celdas a la fila
+                var cellEditar = fila.insertCell(0);
+                var cellId = fila.insertCell(1);
+                var cellNombreProducto = fila.insertCell(2);
+                var cellDescripcionProducto = fila.insertCell(3);
+                var cellBorrar = fila.insertCell(4);
 
-</script>
+                // Rellenar las celdas con datos del producto
+                cellEditar.innerHTML = '<button class="btn btn-warning" onclick="editarFila(' + producto.id + ')">Editar</button>';
+                cellId.innerHTML = producto.id;
+                cellNombreProducto.innerHTML = producto.nombre;
+                cellDescripcionProducto.innerHTML = producto.descripcion;
+                cellBorrar.innerHTML = '<button class="btn btn-danger" onclick="eliminarFila(' + producto.id + ')">Borrar</button>';
+            });
+        }
+    </script>
 </body>
 </html>
+
 
