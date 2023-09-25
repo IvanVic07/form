@@ -74,7 +74,8 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
-    
+
+    <script>
     var filaId = 1; // Identificador de fila inicial
     var productosExistentes = {}; // Objeto para almacenar productos existentes
     
@@ -83,3 +84,52 @@
         var idProducto = document.getElementById("idProducto").value;
         var nombreProducto = document.getElementById("nombreProducto").value;
         var descripcionProducto = document.getElementById("descripcionProducto").value;
+
+        // Validar si todos los campos están llenos
+        if (idProducto === "" || nombreProducto === "" || descripcionProducto === "") {
+            alert("Por favor, completa todos los campos para agregar el producto.");
+            return;
+        }
+
+        // Validar si el producto ya existe
+        if (productosExistentes[idProducto]) {
+            alert("El producto con este ID ya existe.");
+            return;
+        }
+
+        // Crear una nueva fila en la tabla
+        var tabla = document.getElementById("tablaProductos");
+        var fila = tabla.insertRow();
+
+        // Asignar un identificador único a la fila
+        fila.setAttribute("id", "fila" + filaId);
+
+        // Agregar celdas a la fila
+        var cellEditar = fila.insertCell(0);
+        var cellIdProducto = fila.insertCell(1);
+        var cellNombreProducto = fila.insertCell(2);
+        var cellDescripcionProducto = fila.insertCell(3);
+        var cellBorrar = fila.insertCell(4);
+
+        // Agregar botones de editar y eliminar en la fila
+        cellEditar.innerHTML = '<button class="btn btn-warning" onclick="editarFila(' + filaId + ')">Editar</button>';
+        cellIdProducto.innerHTML = idProducto;
+        cellNombreProducto.innerHTML = nombreProducto;
+        cellDescripcionProducto.innerHTML = descripcionProducto;
+        cellBorrar.innerHTML = '<button class="btn btn-danger" onclick="eliminarFila(' + filaId + ')">Borrar</button>';
+
+        // Incrementar el identificador de fila
+        filaId++;
+
+        // Agregar el producto a la lista de productos existentes
+        productosExistentes[idProducto] = true;
+
+        // Limpiar los campos del formulario
+        document.getElementById("idProducto").value = "";
+        document.getElementById("nombreProducto").value = "";
+        document.getElementById("descripcionProducto").value = "";
+    }
+</script>
+</body>
+</html>
+
